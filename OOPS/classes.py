@@ -82,3 +82,11 @@ print("Minimum salary:", Employee.minimum_wage) # class value
 
 e1 = Employee.new_employee("Dean", date(1998, 6, 19))
 print(e1)
+
+def demo(*args, **kwargs):
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+demo(1, 2, 3, a=10, b=20)
+# args: (1, 2, 3)
+# kwargs: {'a': 10, 'b': 20}
