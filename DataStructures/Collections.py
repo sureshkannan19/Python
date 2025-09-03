@@ -14,11 +14,11 @@ print(add_to_list(1))
 print(add_to_list(2))
 
 #comprehensive way to populate data structures
-c_list = [5 * x for x in range(26) if x%5 == 0]
+c_list = [5 * x if x%5 == 0 else x for x in  range(26)]
 print(c_list)
 
 # Generated Expression
-gen = (5 * x for x in range(26) if x%5 == 0)
+gen = (x for x in range(5))
 print(next(gen))
 print(next(gen))
 print(next(gen))
@@ -26,3 +26,7 @@ print(next(gen))
 
 
 print(type((1 , 2, 3)))
+print(type(gen))
+print(list(gen))
+
+print(list(enumerate(['a', 'b', 'c'], 0)))

@@ -21,7 +21,7 @@ for k in my_dict:  #  Just Keys
     print("Key:", k)
 
 for k, v in my_dict.items():
-    print("Key:", k, "Value:", v)
+    print("Key:", k, "Value:", v)  # False
 
 try:
     movies_i_like[1]

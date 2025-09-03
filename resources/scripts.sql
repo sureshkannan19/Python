@@ -1,4 +1,3 @@
-create schema shows;
 CREATE TABLE shows.quotes (
     id SERIAL PRIMARY KEY,
     quote TEXT NOT NULL,
