@@ -1,20 +1,13 @@
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from EnvironmentConfig import get_db_url
 
-import os
+_engine = None
 
-env = os.getenv("APP_ENV", "prod")
-dotenv_path = f"../resources/.env.{env}"
-load_dotenv(os.path.expanduser(dotenv_path))
-DB_URL = os.getenv("DB_URL")
-DB_SCHEMA = os.getenv("DB_SCHEMA", "")
-
-engine = create_engine(DB_URL, echo=True)
-
-SessionLocal = sessionmaker(bind=engine)
-
-def schema_args():
-    if DB_URL.startswith("postgresql"):
-        return {"schema": DB_SCHEMA}
-    return {}
+def get_engine():
+    global _engine
+    if _engine is None:
+        db_url = get_db_url()
+        if db_url is None:
+            raise ValueError("DB_URL not found in environment variables")
+        _engine = create_engine(db_url, echo=True)
+    return _engine

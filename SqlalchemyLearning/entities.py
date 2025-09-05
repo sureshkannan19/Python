@@ -1,6 +1,7 @@
 from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
-from dbconfig import schema_args
+from SqlalchemyLearning.EnvironmentConfig import schema_args
+
 
 class Base(DeclarativeBase):
     pass

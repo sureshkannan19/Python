@@ -1,9 +1,8 @@
 from sqlalchemy import select
-from SqlalchemyLearning.entities import Quotes, Base
-from dbconfig import engine
+from dbconfig import get_engine
+from SqlalchemyLearning.entities import Quotes
 
-Base.metadata.create_all(bind=engine)
-
-with engine.connect() as conn:
+print("Inside SqlAlchemyLearning")
+with get_engine().connect() as conn:
     result = conn.execute(select(Quotes))
     print(result.fetchone())
