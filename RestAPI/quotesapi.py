@@ -19,6 +19,10 @@ def save_quotes(quote: QuotesInput) -> list[QuotesOutput]:
     all_quotes.append(QuotesOutput(id=len(all_quotes) + 1, quote=quote.quote, source=quote.source))
     return save_quotes_to_json(all_quotes)
 
+@app.delete("/quotes/{quote_id}", status_code=204)
+def save_quotes(quote_id: int):
+    all_quotes = get_quotes_from_json(None)
+    save_quotes_to_json([q for q in all_quotes if q.id != quote_id])
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
