@@ -1,6 +1,8 @@
+print("Inside entities.py")
+
 from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
-from SqlalchemyLearning.EnvironmentConfig import schema_args
+from environment import env_config
 
 
 class Base(DeclarativeBase):
@@ -8,8 +10,11 @@ class Base(DeclarativeBase):
 
 class Quotes(Base):
     __tablename__ = 'quotes'
-    __table_args__ = schema_args()
+    __table_args__ = env_config.schema_args()
 
     id: Mapped[int] = mapped_column(primary_key=True)
     quote: Mapped[str] = mapped_column(String)
     source: Mapped[str] = mapped_column(String)
+
+    def __repr__(self):
+        return f"<Quote(id={self.id}, quote={self.quote}, source={self.source})>"
