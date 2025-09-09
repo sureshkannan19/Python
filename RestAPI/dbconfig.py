@@ -1,9 +1,14 @@
-print("Inside dbconfig.py")
-
 from sqlalchemy import create_engine
-from SqlalchemyLearning.entities import Base
-from SqlalchemyLearning.environment import env_config
+from sqlalchemy.orm import Session
 
+from RestAPI.entities import Base
+from RestAPI.environment import env_config
+
+def get_session():
+    with Session(DatabaseConfig().get_engine()) as session:
+        print("Session Created")
+        yield session
+        print("Session Closed")
 
 class DatabaseConfig:
 

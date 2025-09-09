@@ -4,6 +4,22 @@ CREATE TABLE shows.quotes (
     source VARCHAR(100) NOT NULL
 );
 
+
+CREATE TABLE PYSK.shows (
+    show_id SERIAL PRIMARY KEY,
+    show_name TEXT NOT NULL,
+	genre varchar(200) not null
+);
+
+CREATE TABLE PYSK.characters (
+    ch_id SERIAL PRIMARY KEY,
+    ch_name varchar(100) NOT NULL,
+	role varchar(200) not null,
+	show_id INTEGER NOT NULL,
+	FOREIGN KEY (show_id) REFERENCES PYSK.shows(show_id)
+);
+
+
 INSERT INTO shows.quotes (quote, source) VALUES
 ('It''s not who we are underneath, it''s what we do that defines us', 'Batman Begins'),
 ('You either die a hero or live long enough to see yourself become the villan', 'Batman: The Dark Knight'),

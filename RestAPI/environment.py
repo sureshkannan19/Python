@@ -1,5 +1,3 @@
-print("Inside environment.py")
-import sys
 import os
 from dotenv import load_dotenv
 
@@ -20,7 +18,7 @@ def get_env_config():
     global _instance
     if _instance is None:
         print("Creating EnvironmentConfig Singleton")
-        env = os.getenv("APP_ENV", "dev")
+        env = os.getenv("APP_ENV", "prod")
         dotenv_path = f"../resources/.env.{env}"
         load_dotenv(os.path.expanduser(dotenv_path))
         _instance = EnvConfig()
@@ -28,8 +26,7 @@ def get_env_config():
         _instance.db_schema = os.getenv("DB_SCHEMA", "")
         if _instance.db_url is None:
             raise ValueError("DB_URL not found")
-        print("Created EnvironmentConfig Singleton")
+        print("Created EnvironmentConfig Singleton with DB_SCHEMA=", _instance.db_schema)
     return _instance
 
 env_config = get_env_config()
-print("Modules loaded by now: ", sys.modules.get("SqlalchemyLearning"))
