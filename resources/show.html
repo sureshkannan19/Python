@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ show_name }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Show: {{ show_name }}</h1>
+
+    <h2>Characters</h2>
+    <ul>
+        {% for ch in characters %}
+            <li>
+                <strong>{{ ch.ch_name }}</strong>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if not characters %}
+        <p>No characters found.</p>
+    {% endif %}
+</body>
+</html>

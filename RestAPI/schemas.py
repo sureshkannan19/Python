@@ -1,5 +1,6 @@
 import json
 import os
+from typing import List
 
 from pydantic import BaseModel
 
@@ -63,6 +64,10 @@ class CharactersIn(BaseModel):
 class CharactersOut(CharactersIn):
     ch_id: int
     show_id: int
+
+    @classmethod
+    def entities_to_models(cls, chs: List[Characters]):
+        return [CharactersOut(ch_id=ch.ch_id, show_id=ch.show_id, ch_name=ch.ch_name, role=ch.role) for ch in chs]
 
     @classmethod
     def entity_to_model(cls, ch: Characters):
