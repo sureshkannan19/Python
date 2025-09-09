@@ -5,9 +5,9 @@ from RestAPI.dbconfig import get_session
 from RestAPI.entities import Shows, Characters
 from fastapi import Depends, APIRouter
 from RestAPI.schemas import ShowsOut, ShowsIn
-show_router = APIRouter()
+router = APIRouter(prefix="/shows")
 
-@show_router.get("/shows")
+@router.get("/")
 async def get_shows(session: Annotated[Session, Depends(get_session)],
                     show_name: str | None = None) -> list[ShowsOut]:
     stmt = select(Shows)
@@ -16,7 +16,7 @@ async def get_shows(session: Annotated[Session, Depends(get_session)],
     return [ShowsOut.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
 
 
-@show_router.post("/shows")
+@router.post("/")
 async def upsert_shows(session: Annotated[Session, Depends(get_session)], show: ShowsIn) -> ShowsOut:
     show_entity = Shows(show_name=show.show_name, genre=show.genre)
     show_entity.characters.extend(

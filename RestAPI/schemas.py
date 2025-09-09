@@ -32,8 +32,7 @@ class QuotesOutput(QuotesInput):
 def get_quotes_from_json(source):
     try:
         with open(filepath) as f:
-            return [QuotesOutput.model_validate(obj) if source is None else obj['source'] == source for obj in
-                    json.load(f)]
+            return [QuotesOutput.model_validate(obj) for obj in json.load(f) if source is None or obj['source'] == source]
     except FileNotFoundError:
         print("File not found", filepath)
 
@@ -60,6 +59,7 @@ class CharactersIn(BaseModel):
         }
     }
 
+
 class CharactersOut(CharactersIn):
     ch_id: int
     show_id: int
@@ -67,6 +67,7 @@ class CharactersOut(CharactersIn):
     @classmethod
     def entity_to_model(cls, ch: Characters):
         return CharactersOut(ch_id=ch.ch_id, show_id=ch.show_id, ch_name=ch.ch_name, role=ch.role)
+
 
 class ShowsIn(BaseModel):
     genre: str | None = "ALL"
@@ -87,9 +88,11 @@ class ShowsIn(BaseModel):
         }
     }
 
+
 class ShowsOut(ShowsIn):
     show_id: int
 
     @classmethod
     def entity_to_model(cls, show: Shows):
-        return ShowsOut(show_id=show.show_id, show_name=show.show_name, genre= show.genre,characters=[CharactersOut.entity_to_model(ch) for ch in show.characters])
+        return ShowsOut(show_id=show.show_id, show_name=show.show_name, genre=show.genre,
+                        characters=[CharactersOut.entity_to_model(ch) for ch in show.characters])

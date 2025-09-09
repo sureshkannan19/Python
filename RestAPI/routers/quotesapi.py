@@ -8,22 +8,22 @@ from fastapi import Depends, APIRouter
 from RestAPI.schemas import save_quotes_to_json
 from RestAPI.schemas import get_quotes_from_json, QuotesInput, QuotesOutput
 
-quote_router = APIRouter()
+router = APIRouter(prefix="/quotes")
 
 
-@quote_router.get("/quotes/json")
+@router.get("/json")
 def get_quotes(source: str | None = None) -> list[QuotesOutput]:
     return get_quotes_from_json(source)
 
 
-@quote_router.post("/quotes/json")
+@router.post("/json")
 def save_quotes(quote: QuotesInput) -> list[QuotesOutput]:
     all_quotes = get_quotes_from_json(None)
     all_quotes.append(QuotesOutput(id=len(all_quotes) + 1, quote=quote.quote, source=quote.source))
     return save_quotes_to_json(all_quotes)
 
 
-@quote_router.get("/quotes/db")
+@router.get("/db")
 async def get_quotes(session: Annotated[Session, Depends(get_session)], source: str | None = None) -> list[
     QuotesOutput]:
     stmt = select(Quotes)
@@ -32,7 +32,7 @@ async def get_quotes(session: Annotated[Session, Depends(get_session)], source: 
     return [QuotesOutput.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
 
 
-@quote_router.post("/quotes/db")
+@router.post("/db")
 def save_quotes(session: Annotated[Session, Depends(get_session)],
                 quote_in: QuotesInput) -> list[QuotesOutput]:
     quotes_entity = Quotes(quote=quote_in.quote, source=quote_in.source)
@@ -43,7 +43,7 @@ def save_quotes(session: Annotated[Session, Depends(get_session)],
     return [QuotesOutput.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
 
 
-@quote_router.delete("/quotes/json/{quote_id}", status_code=204)
+@router.delete("/json/{quote_id}", status_code=204)
 def save_quotes(quote_id: int):
     all_quotes = get_quotes_from_json(None)
     save_quotes_to_json([q for q in all_quotes if q.id != quote_id])
