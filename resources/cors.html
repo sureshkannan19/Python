@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button Event Example</title>
+  <script>
+    function callBackend() {
+      fetch("http://localhost:8000/shows/?show_name=Supernatural")
+        .then(response => response.text())
+        .then(data => {
+          alert("Response: " + data);
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Error calling backend!");
+        });
+    }
+  </script>
+</head>
+<body>
+  <h2>Call Localhost Backend</h2>
+  <button onclick="callBackend()">Click Me</button>
+</body>
+</html>

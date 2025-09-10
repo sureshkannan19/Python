@@ -67,7 +67,7 @@ class CharactersOut(CharactersIn):
 
     @classmethod
     def entities_to_models(cls, chs: List[Characters]):
-        return [CharactersOut(ch_id=ch.ch_id, show_id=ch.show_id, ch_name=ch.ch_name, role=ch.role) for ch in chs]
+        return [cls.entity_to_model(ch) for ch in chs]
 
     @classmethod
     def entity_to_model(cls, ch: Characters):

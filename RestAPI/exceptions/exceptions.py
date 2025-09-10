@@ -1,0 +1,3 @@
+
+class ShowNotFoundException(Exception):
+    pass
