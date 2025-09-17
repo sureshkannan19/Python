@@ -10,7 +10,8 @@ from fastapi.requests import Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from RestAPI.exceptions.exceptions import ShowNotFoundException
-from routers import showsapi, quotesapi, basicapi
+from RestAPI.routers import usersapi
+from routers import showsapi, quotesapi, basicapi, authapi
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -19,7 +20,8 @@ app = FastAPI(title="API Learning")
 app.include_router(basicapi.router)
 app.include_router(quotesapi.router)
 app.include_router(showsapi.router)
-
+app.include_router(usersapi.router)
+app.include_router(auth.router)
 
 # Global Exception handler
 @app.exception_handler(ShowNotFoundException)

@@ -2,7 +2,6 @@ import os.path
 from pathlib import Path
 from typing import Annotated
 
-from fastapi.security import oauth2
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from fastapi.templating import Jinja2Templates
@@ -20,7 +19,7 @@ router = APIRouter(prefix="/shows")
 
 @router.get("/")
 async def get_shows(session: Annotated[Session, Depends(get_session)],
-                    token: Annotated[str | None, Header()]= None,
+                    token: Annotated[str | None, Header()] = None,
                     show_name: str | None = None) -> list[ShowsOut]:
     print(f"Token is {token}")
     stmt = select(Shows)

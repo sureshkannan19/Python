@@ -3,8 +3,9 @@ import os
 from typing import List
 
 from pydantic import BaseModel
+from sqlalchemy import Sequence
 
-from RestAPI.entities import Quotes, Shows, Characters
+from RestAPI.entities import Quotes, Shows, Characters, Users
 
 filepath = os.path.expanduser("~/PycharmProjects/PythonProject/resources/quotes.json")
 
@@ -33,7 +34,8 @@ class QuotesOutput(QuotesInput):
 def get_quotes_from_json(source):
     try:
         with open(filepath) as f:
-            return [QuotesOutput.model_validate(obj) for obj in json.load(f) if source is None or obj['source'] == source]
+            return [QuotesOutput.model_validate(obj) for obj in json.load(f) if
+                    source is None or obj['source'] == source]
     except FileNotFoundError:
         print("File not found", filepath)
 
@@ -101,3 +103,28 @@ class ShowsOut(ShowsIn):
     def entity_to_model(cls, show: Shows):
         return ShowsOut(show_id=show.show_id, show_name=show.show_name, genre=show.genre,
                         characters=[CharactersOut.entity_to_model(ch) for ch in show.characters])
+
+
+class UserIn(BaseModel):
+
+    user_name: str
+    password: str
+
+    def model_to_entity(self):
+        users = Users(self.user_name)
+        users.set_password(self.password)
+        return users
+
+
+class UserOut(BaseModel):
+
+    user_id: int
+    username: str
+
+    @classmethod
+    def entity_to_model(cls, user: Users):
+        return UserOut(user_id=user.user_id, username=user.user_name)
+
+    @classmethod
+    def entities_to_models(cls, users: Sequence[Users]):
+        return [UserOut.entity_to_model(user) for user in users]

@@ -19,6 +19,12 @@ CREATE TABLE PYSK.characters (
 	FOREIGN KEY (show_id) REFERENCES PYSK.shows(show_id)
 );
 
+create table public.users (
+user_id serial primary key,
+user_name varchar(100) not null,
+password_hash varchar(200) not null
+);
+
 
 INSERT INTO shows.quotes (quote, source) VALUES
 ('It''s not who we are underneath, it''s what we do that defines us', 'Batman Begins'),
