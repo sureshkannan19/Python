@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 _instance = None
@@ -19,7 +21,8 @@ def get_env_config():
     if _instance is None:
         print("Creating EnvironmentConfig Singleton")
         env = os.getenv("APP_ENV", "prod")
-        dotenv_path = f"../resources/.env.{env}"
+        base_dir = Path(__file__).resolve().parent.parent
+        dotenv_path = base_dir / "resources" / f".env.{env}"
         load_dotenv(os.path.expanduser(dotenv_path))
         _instance = EnvConfig()
         _instance.db_url = os.getenv("DB_URL")

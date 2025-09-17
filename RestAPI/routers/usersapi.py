@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.params import Depends
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from typing import Annotated
