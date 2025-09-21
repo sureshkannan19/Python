@@ -2,7 +2,7 @@ import psycopg2
 import psycopg2.extras
 from dataclasses import dataclass
 
-connection = psycopg2.connect(host="localhost",database="pydb",user="sk_user",password="adminsk", port="5432")
+connection = psycopg2.connect(host="localhost",database="public",user="postgres",password="adminsk", port="5432")
 
 @dataclass(slots=True)
 class Quotes:

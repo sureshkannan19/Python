@@ -1,6 +1,6 @@
 from typing import Annotated
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from RestAPI.dbconfig import get_session
 from RestAPI.entities import Quotes
 from fastapi import Depends, APIRouter
@@ -24,23 +24,23 @@ def save_quotes(quote: QuotesInput) -> list[QuotesOutput]:
 
 
 @router.get("/db")
-async def get_quotes(session: Annotated[Session, Depends(get_session)], source: str | None = None) -> list[
+async def get_quotes(session: Annotated[AsyncSession, Depends(get_session)], source: str | None = None) -> list[
     QuotesOutput]:
     stmt = select(Quotes)
     if source is not None:
         stmt = stmt.where(Quotes.source == source)
-    return [QuotesOutput.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
+    return [QuotesOutput.entity_to_model(q) for q in await session.execute(stmt).scalars().all()]
 
 
 @router.post("/db")
-def save_quotes(session: Annotated[Session, Depends(get_session)],
+async def save_quotes(session: Annotated[AsyncSession, Depends(get_session)],
                 quote_in: QuotesInput) -> list[QuotesOutput]:
     quotes_entity = Quotes(quote=quote_in.quote, source=quote_in.source)
     session.add(quotes_entity)
-    session.commit()
-    session.refresh(quotes_entity)
+    await session.commit()
+    await session.refresh(quotes_entity)
     stmt = select(Quotes)
-    return [QuotesOutput.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
+    return [QuotesOutput.entity_to_model(q) for q in await session.execute(stmt).scalars().all()]
 
 
 @router.delete("/json/{quote_id}", status_code=204)
