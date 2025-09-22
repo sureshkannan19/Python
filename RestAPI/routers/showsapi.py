@@ -14,18 +14,19 @@ from sqlalchemy.ext.asyncio import AsyncSession
 router = APIRouter(prefix="/shows")
 
 
+
 @router.get("/")
-async def get_shows(session: Annotated[AsyncSessionession, Depends(get_session)],
+async def get_shows(session: Annotated[AsyncSession, Depends(get_session)],
                     token: Annotated[str | None, Header()] = None,
                     show_name: str | None = None) -> list[ShowsOut]:
     print(f"Token is {token}")
     stmt = select(Shows)
     if show_name is not None:
         stmt = stmt.where(Shows.show_name == show_name)
-    result = await session.execute(stmt).scalars().all()
+    result = await session.execute(stmt)
     if not result and show_name is not None:
          raise ShowNotFoundException(f"{show_name} show not found")
-    return [ShowsOut.entity_to_model(q) for q in session.execute(stmt).scalars().all()]
+    return [ShowsOut.entity_to_model(q) for q in result]
 
 
 @router.post("/")
@@ -49,7 +50,8 @@ templates = Jinja2Templates(directory=path)
 async def read_show(session: Annotated[AsyncSession, Depends(get_session)], request: Request, show_name: str):
     subquery = select(Shows).where(Shows.show_name == show_name).subquery()
     stmt = select(Characters).join(subquery)
-    characters = CharactersOut.entities_to_models(await session.execute(stmt).scalars().all())
+    result = await session.execute(stmt)
+    characters = CharactersOut.entities_to_models(result.scalars().all())
     return templates.TemplateResponse(
         "show.html",
         {

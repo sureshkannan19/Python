@@ -14,7 +14,8 @@ from RestAPI.routers import shows_router, auth_router, quotes_router, users_rout
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-app = FastAPI()
+
+
 app = FastAPI(title="API Learning")
 app.include_router(shows_router)
 app.include_router(auth_router)

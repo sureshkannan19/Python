@@ -23,7 +23,8 @@ class Quotes(Base):
 
 class Shows(Base):
     __tablename__ = 'shows'
-    __table_args__ = env_config.schema_args()
+    # __table_args__ = env_config.schema_args()
+    __table_args__ ={"schema": "public"}
 
     show_id: Mapped[int] = mapped_column(primary_key=True)
     show_name: Mapped[str] = mapped_column(String)

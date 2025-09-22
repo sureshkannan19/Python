@@ -29,7 +29,8 @@ async def get_quotes(session: Annotated[AsyncSession, Depends(get_session)], sou
     stmt = select(Quotes)
     if source is not None:
         stmt = stmt.where(Quotes.source == source)
-    return [QuotesOutput.entity_to_model(q) for q in await session.execute(stmt).scalars().all()]
+    result = await session.execute(stmt)
+    return [QuotesOutput.entity_to_model(q) for q in result.scalars().all()]
 
 
 @router.post("/db")
@@ -40,7 +41,8 @@ async def save_quotes(session: Annotated[AsyncSession, Depends(get_session)],
     await session.commit()
     await session.refresh(quotes_entity)
     stmt = select(Quotes)
-    return [QuotesOutput.entity_to_model(q) for q in await session.execute(stmt).scalars().all()]
+    result = await session.execute(stmt)
+    return [QuotesOutput.entity_to_model(q) for q in result.scalars().all()]
 
 
 @router.delete("/json/{quote_id}", status_code=204)
