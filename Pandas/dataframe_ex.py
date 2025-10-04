@@ -11,7 +11,9 @@ taranto_movies = pd.DataFrame(
      "Movies": ["Inglourious Basterds", "Once Upon a Time in Hollywood", "Kill Bill"]})
 
 df_combined = pd.concat([nolan_movies, fincher_movies, taranto_movies])  # row wise df combined
+df_combined.reset_index(drop=True, inplace=True)
+print(df_combined)
 rating_df = pd.DataFrame({"Rating": [10, 10, 10]})
 df_combined = pd.concat([df_combined, rating_df], axis=1)  # Column wise df combined
-df_combined.reset_index(drop=True, inplace=True)
+# df_combined["Rating"] = 10 all the rows should have same value then this approach is fine
 print(df_combined)
