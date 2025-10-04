@@ -30,3 +30,7 @@ print(type(gen))
 print(list(gen))
 
 print(list(enumerate(['a', 'b', 'c'], 0)))
+
+array = [1, 2, 3, 4]
+array.extend([5, 6])
+print(array)

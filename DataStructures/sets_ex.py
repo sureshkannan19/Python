@@ -53,3 +53,10 @@ emp3 = Employee(1, 'A', 300)
 
 unique_list = {emp1, emp2, emp3}
 print(unique_list)
+
+
+set_ex = set()
+set_ex.add(3)
+print(set_ex.__contains__(2))
+
+print('A'.lower())

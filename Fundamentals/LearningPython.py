@@ -1,3 +1,6 @@
+quote = input("What's your favourite quote:")
+print(quote)
+
 for i in range(0, 7, 2):
     print(i)
     break
