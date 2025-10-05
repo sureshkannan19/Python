@@ -1,0 +1,44 @@
+[
+    {"director": "Christopher Nolan", "movie": "Inception", "rating" : 10 },
+    {"director": "Christopher Nolan", "movie": "Interstellar", "rating" : 10 },
+    {"director": "Christopher Nolan", "movie": "The Dark Knight", "rating" : 10 },
+    {"director": "Christopher Nolan", "movie": "Tenet", "rating" : 10 },
+    {"director": "Christopher Nolan", "movie": "Memento", "rating" : 10 },
+    {"director": "Christopher Nolan", "movie": "The Prestige", "rating" : 10 },
+
+    {"director": "David Fincher", "movie": "Fight Club", "rating" : 10 },
+    {"director": "David Fincher", "movie": "Gone Girl", "rating" : 10 },
+    {"director": "David Fincher", "movie": "Se7en", "rating" : 10 },
+    {"director": "David Fincher", "movie": "The Social Network", "rating" : 10 },
+    {"director": "David Fincher", "movie": "Zodiac", "rating" : 10 },
+
+    {"director": "Stephen Spielberg", "movie": "Jurassic Park", "rating" : 10 },
+    {"director": "Stephen Spielberg", "movie": "Schindler's List", "rating" : 10 },
+    {"director": "Stephen Spielberg", "movie": "E.T. the Extra-Terrestrial", "rating" : 10 },
+    {"director": "Stephen Spielberg", "movie": "Saving Private Ryan", "rating" : 10 },
+    {"director": "Stephen Spielberg", "movie": "Catch Me If You Can", "rating" : 10 },
+
+    {"director": "Quentin Tarantino", "movie": "Pulp Fiction", "rating" : 10 },
+    {"director": "Quentin Tarantino", "movie": "Django Unchained", "rating" : 10 },
+    {"director": "Quentin Tarantino", "movie": "Inglourious Basterds", "rating" : 10 },
+    {"director": "Quentin Tarantino", "movie": "Kill Bill: Vol. 1", "rating" : 10 },
+    {"director": "Quentin Tarantino", "movie": "Once Upon a Time in Hollywood", "rating" : 10 },
+
+    {"director": "Mani Ratnam", "movie": "Mouna Ragam", "rating" : 10 },
+    {"director": "Mani Ratnam", "movie": "Dil Se", "rating" : 10 },
+    {"director": "Mani Ratnam", "movie": "Nayakan", "rating" : 10 },
+    {"director": "Mani Ratnam", "movie": "Guru", "rating" : 10 },
+    {"director": "Mani Ratnam", "movie": "Thalapthi", "rating" : 10 },
+
+    {"director": "Vetrimaran", "movie": "Asuran", "rating" : 10 },
+    {"director": "Vetrimaran", "movie": "Vada Chennai", "rating" : 10 },
+    {"director": "Vetrimaran", "movie": "Polladhavan", "rating" : 10 },
+    {"director": "Vetrimaran", "movie": "Visaranai", "rating" : 10 },
+    {"director": "Vetrimaran", "movie": "Viduthalai: Part 1", "rating" : 10 },
+
+    {"director": "A R Murugadoss", "movie": "Ghajini", "rating" : 10 },
+    {"director": "A R Murugadoss", "movie": "Thuppakki", "rating" : 10 },
+    {"director": "A R Murugadoss", "movie": "Kaththi", "rating" : 10 },
+    {"director": "A R Murugadoss", "movie": "Ramana", "rating" : 10 },
+    {"director": "A R Murugadoss", "movie": "Spyder", "rating" : 10 }
+]
