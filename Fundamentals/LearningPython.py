@@ -26,6 +26,22 @@ for k in my_dict:  #  Just Keys
 for k, v in my_dict.items():
     print("Key:", k, "Value:", v)  # False
 
+
+def get_authors(books):
+    yield from (book.get("author") for book in books if book.get("author"))
+
+books = [
+    {"title": "War and Peace", "author": "Tolstoy"},
+    {"title": "Unknown"},
+    {"title": "Crime", "author": "Dostoevsky"},
+    {"title": "Anna Karenina", "author": "Tolstoy"},  # duplicate
+]
+
+gen = get_authors(books)  # nothing executes yet — lazy
+print(next(gen))  # → "Tolstoy"     ← pauses here
+print(next(gen))  # → "Dostoevsky"  ← pauses here
+print(next(gen))   # StopIteration   ← exhausted
+
 try:
     movies_i_like[1]
 except IndexError:
