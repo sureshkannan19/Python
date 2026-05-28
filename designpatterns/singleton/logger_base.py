@@ -1,7 +1,7 @@
 import datetime
 from singleton_base import Singleton
 
-class Logger(Singleton):
+class Logger(metaclass=Singleton):
     log_file = None
 
     def __init__(self, path):
