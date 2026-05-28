@@ -1,8 +1,8 @@
-import psycopg2
-import psycopg2.extras
+import psycopg
+import psycopg.extras
 from dataclasses import dataclass
 
-connection = psycopg2.connect(host="localhost",database="public",user="postgres",password="adminsk", port="5432")
+connection = psycopg.connect(host="localhost",database="public",user="postgres",password="adminsk", port="5432")
 
 @dataclass(slots=True)
 class Quotes:
@@ -15,7 +15,7 @@ def add_quotes():
     quote = input("What's your favourite quote?\n")
     source = input("What the source?\n")
     data = [(quote, source)]
-    psycopg2.extras.execute_values(cursor, "INSERT INTO shows.quotes (quote, source) VALUES %s", data)
+    psycopg.extras.execute_values(cursor, "INSERT INTO shows.quotes (quote, source) VALUES %s", data)
     connection.commit()
     cursor.close()
     connection.close()
